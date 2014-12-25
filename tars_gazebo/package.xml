@@ -1,0 +1,30 @@
+<package>
+  <name>tars_gazebo</name>
+  <version>0.1.0</version>
+  <description>tars_gazebo</description>
+
+  <!--
+  Based on rrbot_gazebo by:
+  Dave Coleman - davetcoleman@gmail.com
+  http://gazebosim.org/w/index.php?title=Tutorials/1.9/Using_A_URDF_In_Gazebo
+  https://github.com/osrf/gazebo_ros_demos
+  -->
+  <maintainer email="dbrody@gmail.com">David Brody</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website"></url>
+  <url type="bugtracker"></url>
+  <url type="repository"></url>
+
+  <author email="dbrody@gmail.com">David Brody</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <run_depend>tars_description</run_depend>
+  <run_depend>tars_control</run_depend> 
+  <run_depend>gazebo_ros</run_depend> 
+
+  <export>
+  </export>
+</package>

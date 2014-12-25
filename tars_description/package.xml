@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package>
+  <name>tars_description</name>
+  <version>0.0.0</version>
+  <description>The tars_description package</description>
+
+  <!--
+  Based on rrbot_description:
+  by Dave Coleman - davetcoleman@gmail.com
+  https://github.com/osrf/gazebo_ros_demos
+  http://http://gazebosim.org/w/index.php?title=Tutorials/1.9/Using_A_URDF_In_Gazebo
+  -->
+  <maintainer email="dbrody@gmail.com">David Brody</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website"></url>
+  <url type="bugtracker"></url>
+  <url type="repository"></url>
+
+  <author email="dbrody@gmail.com">David Brody</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <export>
+  </export>
+</package>
