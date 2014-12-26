@@ -33,7 +33,7 @@
                 }, 
                 "topics": {
                   "type": "repr", 
-                  "repr": "[u'/tars/joint1_position_controller/command/data', u'/tars/joint1_position_controller/state/error']"
+                  "repr": "[u'/tars/joint1_position_controller/command/data', u'/tars/joint1_position_controller/state/error', u'/tars/joint2_position_controller/command/data', u'/tars/joint2_position_controller/state/error', u'/tars/joint3_position_controller/command/data', u'/tars/joint3_position_controller/state/error']"
                 }
               }, 
               "groups": {}
@@ -60,7 +60,7 @@
               "keys": {
                 "publishers": {
                   "type": "repr", 
-                  "repr": "u\"[{'topic_name': '/tars/joint1_position_controller/command', 'type_name': 'std_msgs/Float64', 'enabled': False, 'rate': 100.0, 'expressions': {u'/tars/joint1_position_controller/command/data': 'sin(i/100)'}, 'publisher_id': 0, 'counter': 5243}, {'topic_name': '/tars/joint3_position_controller/command', 'type_name': 'std_msgs/Float64', 'enabled': False, 'rate': 100.0, 'expressions': {u'/tars/joint3_position_controller/command/data': '-sin(i/100)'}, 'publisher_id': 0, 'counter': 5243}]\""
+                  "repr": "u\"[{'topic_name': '/tars/joint1_position_controller/command', 'type_name': 'std_msgs/Float64', 'enabled': False, 'rate': 100.0, 'expressions': {u'/tars/joint1_position_controller/command/data': 'sin(i/100)'}, 'publisher_id': 0, 'counter': 5243}, {'topic_name': '/tars/joint2_position_controller/command', 'type_name': 'std_msgs/Float64', 'enabled': False, 'rate': 100.0, 'expressions': {u'/tars/joint2_position_controller/command/data': '-sin(i/100)'}, 'publisher_id': 0, 'counter': 5243}, {'topic_name': '/tars/joint3_position_controller/command', 'type_name': 'std_msgs/Float64', 'enabled': False, 'rate': 100.0, 'expressions': {u'/tars/joint3_position_controller/command/data': '-sin(i/100)'}, 'publisher_id': 0, 'counter': 5243}]\""
                 }
               }, 
               "groups": {}

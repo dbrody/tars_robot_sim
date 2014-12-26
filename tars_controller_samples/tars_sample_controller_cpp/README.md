@@ -1,4 +1,4 @@
-[Main](../../README.md) > [tars_controller_samples](../README.md) > tars_sample_controller_cpp
+[Main](../../README.md) > tars_sample_controller_cpp
 
 # tars_sample_controller_cpp
 

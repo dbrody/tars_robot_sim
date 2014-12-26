@@ -1,11 +1,9 @@
-#!/usr/bin/env python
-
-import roslib; roslib.load_manifest('tars_control')
+#! /usr/bin/env python
 
 import math
 import rospy
 
-from level_helper import level_setup, get_model_position, setJoint1, setJoint2, setJoint3
+from tars_control_lib_py.control import tars_setup, get_model_position, setJoint1, setJoint2, setJoint3
 
 def tars_loop(t):
 	value = math.sin(t * 2) + t / 10
@@ -14,10 +12,10 @@ def tars_loop(t):
 	log_str = "Sending Value: %.2f @ (%.2f, %.2f)" % (value, model_position.x, model_position.y)
 
 	rospy.loginfo(log_str)
-	setJoint1(value)
-	# setJoint2(value)
-	setJoint3(-value)
+	#setJoint1(value)
+	setJoint2(value)
+	#setJoint3(-value)
 
 
 if __name__ == '__main__':
-	level_setup('ExampleController', tars_loop)
+	tars_setup('ExampleController', tars_loop)

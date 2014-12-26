@@ -4,8 +4,8 @@
 
   <!-- Constants for robot dimensions -->
   <xacro:property name="PI" value="3.1415926535897931"/>
-  <xacro:property name="width" value="0.2" /> <!-- Square dimensions (widthxwidth) of beams -->
-  <xacro:property name="depth" value="0.1" /> <!-- Square dimensions (widthxwidth) of beams -->
+  <xacro:property name="width" value="0.33" /> <!-- Square dimensions (widthxwidth) of beams -->
+  <xacro:property name="depth" value="0.2" /> <!-- Square dimensions (widthxwidth) of beams -->
   
 
   <xacro:property name="height1" value="2" /> <!-- Link 1 -->
@@ -13,7 +13,7 @@
   <xacro:property name="height3" value="2" /> <!-- Link 3 -->
   <xacro:property name="height4" value="2" /> <!-- Link 4 -->
 
-  <xacro:property name="segmentmass" value="5" /> <!-- Link Mass -->
+  <xacro:property name="segmentmass" value="30" /> <!-- Link Mass -->
 
   <xacro:property name="camera_link" value="0.05" /> <!-- Size of square 'camera' box -->
   <xacro:property name="axel_offset" value="0.05" /> <!-- Space btw top of beam and the each joint -->
@@ -87,7 +87,7 @@
     </joint>
     <actuator name="motor1">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
+      <mechanicalReduction>100</mechanicalReduction>
     </actuator>
   </transmission>
 
@@ -98,7 +98,7 @@
     </joint>
     <actuator name="motor2">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
+      <mechanicalReduction>100</mechanicalReduction>
     </actuator>
   </transmission>
 
@@ -109,7 +109,7 @@
     </joint>
     <actuator name="motor3">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
+      <mechanicalReduction>100</mechanicalReduction>
     </actuator>
   </transmission>
 

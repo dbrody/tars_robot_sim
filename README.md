@@ -26,11 +26,14 @@ Currently the project makes use of [ROS](http://www.ros.org/) and [Gazebo](http:
 
 ### Components
 + **tars_robot** - Packages used for robot description and simulation
-	+ [**tars_control_lib**](tars_control_lib/README.md) - C++ shared library that abstracts control of the TARS simulated robot 
+	+ [**tars_control_lib**](tars_robot/tars_control_lib/README.md) - C++ shared library that abstracts control of the TARS simulated robot 
+	+ [**tars_control_lib_py**](tars_robot/tars_control_lib_py/README.md) - Python package that abstracts control of the TARS simulated robot 
 	+ **tars_control** - Package used to set up robot controller topics for joints
 	+ **tars_description** - Package used for describing TARS robot model
 	+ **tars_gazebo** - Package used for setting up gazebo simulation environment with TARS robot
-+ [**tars_controller_samples**](tars_controller_samples/README.md) - C++ shared library that abstracts control of the TARS simulated robot 
++ **tars_controller_samples** - Example TARS controllers
+	+ [**tars_sample_controller_cpp**](tars_controller_samples/tars_sample_controller_cpp/README.md) - C++ shared library that abstracts control of the TARS simulated robot 
+	+ [**tars_sample_controller_py**](tars_controller_samples/tars_sample_controller_py/README.md) - Python shared package that abstracts control of the TARS simulated robot 
 
 
 ### Roadmap
