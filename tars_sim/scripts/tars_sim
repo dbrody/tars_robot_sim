@@ -1,0 +1,69 @@
+#! /usr/bin/env python
+
+import rospy
+import roslaunch
+from subprocess import Popen, PIPE
+
+from tars_control_lib_py.control import get_model_position
+from tars_control_lib_py.gazebo_helper import gazebo_delete_object
+from tars_control_lib_py.level_helper import spawn_tars, spawn_cones
+
+def node_def_tars():
+	node_tars = roslaunch.core.Node('tars_sample_controller_py', 'tars_sample_controller')
+	return node_tars
+
+def node_def_controller():
+	# <!-- load the controllers -->
+	# <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+	# 	output="screen" ns="/tars" args="joint1_position_controller joint2_position_controller joint3_position_controller joint_state_controller"/>
+	node_controller = roslaunch.core.Node('controller_manager', 'spawner',
+		name='controller_spawner',
+		respawn=False,
+		output='screen',
+		namespace='/tars',
+		args='joint1_position_controller joint2_position_controller joint3_position_controller joint_state_controller')
+	return node_controller
+
+
+if __name__ == '__main__':
+
+	time_per_sim = 10
+
+	rospy.init_node('TarsSim', anonymous=True)
+	rospy.loginfo('TARS SIM Started.')
+
+	launch = roslaunch.scriptapi.ROSLaunch()
+	launch.start()
+
+	# gazebo_delete_all_objects()
+	while not rospy.is_shutdown():
+		gazebo_delete_object('tars')
+		spawn_cones()
+		spawn_tars()
+
+		node_tars = node_def_tars()
+		node_controller = node_def_controller()
+
+		process_tars = launch.launch(node_tars)
+		process_controller = launch.launch(node_controller)
+
+		rate = rospy.Rate(30)
+
+		start_time = rospy.get_time()
+		while not rospy.is_shutdown():
+			duration = rospy.get_time() - start_time
+			position = get_model_position()
+			rospy.loginfo('Tars (%d): %.2f, %.2f, %.2f', process_tars.is_alive(), position.x, position.y, position.z)
+			rate.sleep()
+
+			if duration > time_per_sim:
+				break
+
+		process_controller.stop()
+		process_tars.stop()
+
+
+
+	rospy.loginfo('TARS SIM stopping.')
+
+
