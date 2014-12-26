@@ -6,12 +6,13 @@
   <xacro:property name="PI" value="3.1415926535897931"/>
   <xacro:property name="width" value="0.33" /> <!-- Square dimensions (widthxwidth) of beams -->
   <xacro:property name="depth" value="0.2" /> <!-- Square dimensions (widthxwidth) of beams -->
-  
 
   <xacro:property name="height1" value="2" /> <!-- Link 1 -->
   <xacro:property name="height2" value="2" /> <!-- Link 2 -->
   <xacro:property name="height3" value="2" /> <!-- Link 3 -->
   <xacro:property name="height4" value="2" /> <!-- Link 4 -->
+
+  <xacro:property name="motor_offset" value="-0.25" /> <!-- Link 4 -->  
 
   <xacro:property name="segmentmass" value="30" /> <!-- Link Mass -->
 
@@ -26,14 +27,14 @@
   <xacro:macro name="leg" params="name offset height">
     <link name="${name}">
       <collision>
-        <origin xyz="0 0 ${offset}" rpy="0 0 0"/>
+        <origin xyz="0 0 ${offset + motor_offset}" rpy="0 0 0"/>
         <geometry>
     <box size="${depth} ${width} ${height}"/>
         </geometry>
       </collision>
 
       <visual>
-        <origin xyz="0 0 ${offset}" rpy="0 0 0"/>
+        <origin xyz="0 0 ${offset + motor_offset}" rpy="0 0 0"/>
         <geometry>
     <box size="${depth} ${width} ${height}"/>
         </geometry>
@@ -61,7 +62,8 @@
     <child link="link2"/>
     <origin xyz="0 ${width} 0" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
-    <dynamics damping="0.0"/>
+    <dynamics damping="0.7"/>
+    <limit velocity="1" effort="100.0"/>
   </joint>
 
   <joint name="joint2" type="continuous">
@@ -69,7 +71,8 @@
     <child link="link3"/>
     <origin xyz="0 ${width} 0" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
-    <dynamics damping="0.0"/>
+    <dynamics damping="0.7"/>
+    <limit velocity="1" effort="100.0"/>
   </joint>
 
   <joint name="joint3" type="continuous">
@@ -77,7 +80,8 @@
     <child link="link4"/>
     <origin xyz="0 ${width} 0" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
-    <dynamics damping="0.0"/>
+    <dynamics damping="0.7"/>
+    <limit velocity="1" effort="100.0"/>
   </joint>
 
   <transmission name="tran1">

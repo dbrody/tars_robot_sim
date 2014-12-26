@@ -17,3 +17,13 @@ tars:
     type: effort_controllers/JointPositionController
     joint: joint3
     pid: {p: 5000.0, i: 0.01, d: 1.0}
+
+  # Joint Limits
+  joint_limits:
+    joint2:
+      has_velocity_limits: true
+      max_velocity: 1
+      has_acceleration_limits: true
+      max_acceleration: 0.25
+      has_effort_limits: true
+      max_effort: 100.0
