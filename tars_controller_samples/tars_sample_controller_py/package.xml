@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-  <name>tars_sample_controller</name>
+  <name>tars_sample_controller_py</name>
   <version>0.0.0</version>
   <description>Sample program to spawn and control the TARS robot</description>
 

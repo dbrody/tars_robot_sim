@@ -54,6 +54,7 @@ Some articles and material that has been helpful:
 + [Tutorial: Using a URDF in Gazebo](http://gazebosim.org/tutorials?tut=ros_urdf)
 + [Tutorial: ROS Control](http://gazebosim.org/tutorials?tut=ros_control)
 + [Package: gazebo](http://wiki.ros.org/gazebo)
++ [Building Modular ROS Packages](http://jbohren.com/articles/modular-ros-packages/)
 
 ## Thanks!
 

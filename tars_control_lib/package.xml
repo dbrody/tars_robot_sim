@@ -1,0 +1,16 @@
+<package>
+	<name>tars_control_lib</name>
+	<maintainer email="dbrody@gmail.com">David Brody</maintainer>
+	<description>
+		A ROS library for controlling the TARS robot from c++.
+	</description>
+	<version>0.0.0</version>
+	<license>BSD</license>
+
+	<!-- Required by Catkin -->
+	<buildtool_depend>catkin</buildtool_depend>
+
+	<build_depend>roscpp</build_depend>
+	<run_depend>roscpp</run_depend>
+
+</package>

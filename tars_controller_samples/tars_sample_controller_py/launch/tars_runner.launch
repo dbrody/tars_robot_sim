@@ -29,6 +29,6 @@
   <include file="$(find tars_control)/launch/tars_control.launch" />
 
   <!-- Run the tars sample controller -->
-  <node name="tars_controller" pkg="tars_sample_controller" type="tars_sample_controller.py" output="screen" />
+  <node name="tars_controller" pkg="tars_sample_controller_py" type="tars_sample_controller.py" output="screen" />
 
 </launch>
