@@ -6,7 +6,7 @@ import rospy
 
 from std_msgs.msg import Float64, String
 
-from gazebo_helper import gazebo_delete_all_objects, gazebo_spawn_robot, gazebo_spawn_object
+from gazebo_helper import gazebo_get_model_state, gazebo_set_model_state, gazebo_delete_all_objects, gazebo_spawn_robot, gazebo_spawn_object
 from control import tars_run
 
 from ros_helper import setupService
@@ -38,19 +38,30 @@ def spawn_tars():
 
 # Spawn the rows of cones for the level
 def spawn_cones():
-	# Get path to cone model
-	cone_file = path.expanduser("~/.gazebo/models/construction_cone/model.sdf")
+	set_cone('cone_1', 0, 2)
+	set_cone('cone_2', 0, -2)
+	set_cone('cone_3', 2, 2)
+	set_cone('cone_4', 2, -2)
+	set_cone('cone_5', 4, 2)
+	set_cone('cone_6', 4, -2)
+	set_cone('cone_7', 6, 2)
+	set_cone('cone_8', 6, -2)
+	set_cone('cone_9', 8, 2)
+	set_cone('cone_10', 8, -2)
+	set_cone('cone_11', 10, 2)
+	set_cone('cone_12', 10, -2)
 
-	# Make cones
-	gazebo_spawn_object('cone_1', cone_file, 0, 2)
-	gazebo_spawn_object('cone_2', cone_file, 0, -2)
-	gazebo_spawn_object('cone_3', cone_file, 2, 2)
-	gazebo_spawn_object('cone_4', cone_file, 2, -2)
-	gazebo_spawn_object('cone_5', cone_file, 4, 2)
-	gazebo_spawn_object('cone_6', cone_file, 4, -2)
-	gazebo_spawn_object('cone_7', cone_file, 6, 2)
-	gazebo_spawn_object('cone_8', cone_file, 6, -2)
-	gazebo_spawn_object('cone_9', cone_file, 8, 2)
-	gazebo_spawn_object('cone_10', cone_file, 8, -2)
-	gazebo_spawn_object('cone_11', cone_file, 10, 2)
-	gazebo_spawn_object('cone_12', cone_file, 10, -2)
+def set_cone(name, x, y):
+	cone = gazebo_get_model_state(name)
+	if not cone:
+		# Get path to cone model
+		cone_file = path.expanduser("~/.gazebo/models/construction_cone/model.sdf")
+		gazebo_spawn_object(name, cone_file, x, y)
+	else:
+		cone.pose.position.x = x
+		cone.pose.position.y = y
+		cone.pose.position.z = 0
+		cone.pose.orientation.x = cone.pose.orientation.y = cone.pose.orientation.z = 0
+		cone.twist.linear.x = cone.twist.linear.y = cone.twist.linear.z = 0
+		cone.twist.angular.x = cone.twist.angular.y = cone.twist.angular.z = 0
+		gazebo_set_model_state(name, cone.pose, cone.twist)

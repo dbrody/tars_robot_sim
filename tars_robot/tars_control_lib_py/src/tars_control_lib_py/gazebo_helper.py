@@ -1,9 +1,14 @@
 import rospy
 from ros_helper import setupService
-from gazebo_msgs.srv import GetWorldProperties, DeleteModel, DeleteModelRequest, SpawnModel, GetModelState, GetModelStateRequest
+from gazebo_msgs.srv import GetWorldProperties, \
+	DeleteModel, DeleteModelRequest, \
+	SpawnModel, \
+	GetModelState, GetModelStateRequest, \
+	SetModelState, SetModelStateRequest
+from gazebo_msgs.msg import ModelState
 
 from controller_manager_msgs.srv import LoadController, SwitchController
-from geometry_msgs.msg import Pose
+from geometry_msgs.msg import Pose, Twist
 from os import path
 
 # Delete all objects in gazebo except for ground_plane
@@ -12,19 +17,25 @@ def gazebo_delete_all_objects():
 
 	print "  Setting up services...",
 	get_world_properties = setupService('/gazebo/get_world_properties', GetWorldProperties)
-	delete_model_service = setupService('/gazebo/delete_model', DeleteModel)
 	try:
 		world_properties = get_world_properties()
 		for name in world_properties.model_names:
 			# Dont delete ground plane object
 			if name != 'ground_plane':
-				print "   Deleting %s ..." % name,
-				delete_model_service(DeleteModelRequest(name))	
-				print "done."
+				gazebo_delete_object(name)
 	except rospy.ServiceException:
 		print "Unable to delete all objects."
 	return False
 
+def gazebo_delete_object(name):
+	delete_model_service = setupService('/gazebo/delete_model', DeleteModel)
+	try:
+		print "   Deleting %s ..." % name,
+		result = delete_model_service(DeleteModelRequest(name))	
+		print result
+	except rospy.ServiceException:
+		return False
+	return True
 
 def gazebo_spawn_robot(robot_file, name, controllers):
 	initial_pose = Pose()
@@ -92,4 +103,11 @@ def gazebo_spawn_object(name, sdf_file, x=0, y=0, z=0):
 
 def gazebo_get_model_state(name, context='world'):
 	get_model_state = setupService('/gazebo/get_model_state', GetModelState)
-	return get_model_state(GetModelStateRequest(name, context))
+	model_state = get_model_state(GetModelStateRequest(name, context))
+	if not model_state.success:
+		return False
+	return model_state 
+
+def gazebo_set_model_state(name, pose, twist, context='world'):
+	set_model_state = setupService('/gazebo/set_model_state', SetModelState)
+	return set_model_state(SetModelStateRequest(ModelState(name, pose, twist, context)))

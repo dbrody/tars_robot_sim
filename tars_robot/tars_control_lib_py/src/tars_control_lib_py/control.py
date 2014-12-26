@@ -11,6 +11,7 @@ def tars_setup(name, loop_func):
 	rospy.init_node(name, anonymous=True)
 	pubs['joint1'] = rospy.Publisher('/tars/joint1_position_controller/command', Float64, queue_size=10)
 	pubs['joint2'] = rospy.Publisher('/tars/joint2_position_controller/command', Float64, queue_size=10)
+	pubs['joint3'] = rospy.Publisher('/tars/joint3_position_controller/command', Float64, queue_size=10)
 	tars_run(loop_func)
 
 
