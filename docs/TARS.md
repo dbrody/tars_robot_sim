@@ -1,3 +1,5 @@
+[Main](../README.md) > inspiration
+
 # TARS Robot
 
 While the robot itself is much more sophisticated, our model is very simplified.
