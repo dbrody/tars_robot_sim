@@ -81,6 +81,7 @@ Some articles and material that has been helpful:
 
 #### ML
 + [Competitive Coevolution through Evolutionary Complexification](https://www.jair.org/media/1338/live-1338-2278-jair.pdf) - Details on NEAT algorithm
++ [Flexible Muscle-Based Locomotion for Bipedal Creatures](http://www.cs.ubc.ca/~van/papers/2013-TOG-MuscleBasedBipeds/2013-TOG-MuscleBasedBipeds.pdf) - Interesting take on training gait
 
 
 ## Thanks!
