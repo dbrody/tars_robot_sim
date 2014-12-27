@@ -3,9 +3,14 @@ project(tars_sim)
 
 find_package(catkin REQUIRED)
 
-catkin_python_setup()
-
 catkin_package()
+
+catkin_python_setup()
 
 catkin_install_python(PROGRAMS scripts/tars_sim
 	DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+
+install(DIRECTORY src
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+
+

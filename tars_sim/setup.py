@@ -1,8 +1,11 @@
 from distutils.core import setup
+from catkin_pkg.python_setup import generate_distutils_setup
 
-setup(
+setup_args = generate_distutils_setup(
 	version='0.0.0',
 	scripts=['scripts/tars_sim'],
 	packages=['tars_sim'],
-	package_dir={'':'src'}
+	package_dir={'': 'src'}
 )
+
+setup(**setup_args)
