@@ -26,4 +26,4 @@ tars:
       has_acceleration_limits: true
       max_acceleration: 0.25
       has_effort_limits: true
-      max_effort: 100.0
+      max_effort: 1000.0

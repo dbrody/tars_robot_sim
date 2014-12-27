@@ -63,7 +63,7 @@
     <origin xyz="0 ${width} 0" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="0.7"/>
-    <limit velocity="1" effort="100.0"/>
+    <limit velocity="1" effort="1000.0"/>
   </joint>
 
   <joint name="joint2" type="continuous">
@@ -72,7 +72,7 @@
     <origin xyz="0 ${width} 0" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="0.7"/>
-    <limit velocity="1" effort="100.0"/>
+    <limit velocity="1" effort="1000.0"/>
   </joint>
 
   <joint name="joint3" type="continuous">
@@ -81,7 +81,7 @@
     <origin xyz="0 ${width} 0" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="0.7"/>
-    <limit velocity="1" effort="100.0"/>
+    <limit velocity="1" effort="1000.0"/>
   </joint>
 
   <transmission name="tran1">
@@ -91,7 +91,7 @@
     </joint>
     <actuator name="motor1">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>100</mechanicalReduction>
+      <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
 
@@ -102,7 +102,7 @@
     </joint>
     <actuator name="motor2">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>100</mechanicalReduction>
+      <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
 
@@ -113,7 +113,7 @@
     </joint>
     <actuator name="motor3">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>100</mechanicalReduction>
+      <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
 
