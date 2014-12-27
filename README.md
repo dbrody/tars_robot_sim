@@ -34,7 +34,8 @@ Currently the project makes use of [ROS](http://www.ros.org/) and [Gazebo](http:
 + **tars_controller_samples** - Example TARS controllers
 	+ [**tars_sample_controller_cpp**](tars_controller_samples/tars_sample_controller_cpp/README.md) - C++ shared library that abstracts control of the TARS simulated robot 
 	+ [**tars_sample_controller_py**](tars_controller_samples/tars_sample_controller_py/README.md) - Python shared package that abstracts control of the TARS simulated robot 
-
++ **tars_sim** - Example simulation runner. Runs TARS robots for period and restarts periodically.
++ **tars_controller_nn** - Example custom controller.
 
 ### Roadmap
 
