@@ -46,4 +46,7 @@ def _setJoint(name, value):
 
 # Returns position of robot model
 def get_model_position():
-	return gazebo_get_model_state('tars').pose.position
+	model_state = gazebo_get_model_state('tars')
+	if model_state == None:
+		return None
+	return model_state.pose.position

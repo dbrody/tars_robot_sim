@@ -9,8 +9,6 @@ from std_msgs.msg import Float64, String
 from gazebo_helper import gazebo_get_model_state, gazebo_set_model_state, gazebo_delete_all_objects, gazebo_spawn_robot, gazebo_spawn_object
 from control import tars_run
 
-from ros_helper import setupService
-
 pubs = dict()
 
 # Set up the level objects and topics
