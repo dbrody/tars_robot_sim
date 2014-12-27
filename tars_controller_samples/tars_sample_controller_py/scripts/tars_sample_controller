@@ -9,9 +9,10 @@ def tars_loop(t):
 	value = math.sin(t * 2) + t / 10
 	
 	model_position = get_model_position()
-	log_str = "Sending Value: %.2f @ (%.2f, %.2f)" % (value, model_position.x, model_position.y)
-
-	rospy.loginfo(log_str)
+	if model_position is not None:
+		log_str = "Sending Value: %.2f @ (%.2f, %.2f)" % (value, model_position.x, model_position.y)
+		rospy.loginfo(log_str)
+	
 	#setJoint1(value)
 	setJoint2(value)
 	#setJoint3(-value)
