@@ -82,6 +82,9 @@ Some articles and material that has been helpful:
 
 #### ML
 + [Competitive Coevolution through Evolutionary Complexification](https://www.jair.org/media/1338/live-1338-2278-jair.pdf) - Details on NEAT algorithm
++ [A Comparative Analysis of Simplification and Complexification in the Evolution of Neural Network Topologies](http://anji.sourceforge.net/docs/james_gecco04.pdf) - Analysis of simplification in a NEAT algorithm
+
+#### ML Applications
 + [Flexible Muscle-Based Locomotion for Bipedal Creatures](http://www.cs.ubc.ca/~van/papers/2013-TOG-MuscleBasedBipeds/2013-TOG-MuscleBasedBipeds.pdf) - Interesting take on training gait ([video](http://vimeo.com/79098420))
 
 
