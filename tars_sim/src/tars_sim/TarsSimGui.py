@@ -49,13 +49,20 @@ class TarsSimGui:
 			velDesired = heur_tracker.getDesiredVelocity()
 
 			jointState = heur_tracker.getJointState()
+			if jointState is not None:
+				joint1 = jointState.position[0]
+				joint2 = jointState.position[1]
+				joint3 = jointState.position[2]
+			else:
+				joint1 = joint2 = joint3 = 0
+
 			jointCommands = heur_tracker.getJointCommands()
-			joint1 = jointState.position[0]
-			joint2 = jointState.position[1]
-			joint3 = jointState.position[2]
-			joint1g = jointCommands[0]
-			joint2g = jointCommands[1]
-			joint3g = jointCommands[2]
+			if jointCommands is not None and len(jointCommands) >= 3:
+				joint1g = jointCommands[0]
+				joint2g = jointCommands[1]
+				joint3g = jointCommands[2]
+			else:
+				joint1g = joint2g = joint3g = 0
 		else:
 			vel = [0, 0, 0]
 			velDesired = [0, 0, 0]
