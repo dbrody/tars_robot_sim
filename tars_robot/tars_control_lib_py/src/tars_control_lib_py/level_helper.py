@@ -7,20 +7,9 @@ import rospy
 from std_msgs.msg import Float64, String
 
 from gazebo_helper import gazebo_get_model_state, gazebo_set_model_state, gazebo_delete_all_objects, gazebo_spawn_robot, gazebo_spawn_object
-from tars_control import tars_run
 
 pubs = dict()
 
-# Set up the level objects and topics
-# Start the level running
-def level_setup(name, loop_func):
-	rospy.init_node(name, anonymous=True)
-	gazebo_delete_all_objects()
-	spawn_cones()
-	if not spawn_tars():
-		print "Unable to spawn new model."
-		sys.exit()
-	tars_run(loop_func)
 
 # Make an instance of the robot
 def spawn_tars():
