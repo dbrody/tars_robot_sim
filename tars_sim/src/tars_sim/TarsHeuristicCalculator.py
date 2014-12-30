@@ -62,10 +62,12 @@ class TarsHeuristicCalculator:
 			# Error for not staying upright
 			self.heur_step += 30 * abs(1.25 - self.pose.position.z) ** 2
 
+		if self.joint_state is not None and self.joint_commands is not None:
 			# Error for sending commands that cant be achieved
 			self.heur_step += 10 * abs(self.joint_commands[0] - self.joint_state.position[0]) ** 2
 			self.heur_step += 10 * abs(self.joint_commands[1] - self.joint_state.position[1]) ** 2
 			self.heur_step += 10 * abs(self.joint_commands[2] - self.joint_state.position[2]) ** 2
+
 
 	def duration(self):
 		return rospy.get_time() - self.start_time
