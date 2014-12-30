@@ -7,6 +7,8 @@
 #include <std_msgs/Float64.h>
 #include <sensor_msgs/JointState.h>
 #include <cassert>
+#include <gazebo_msgs/GetModelState.h>
+#include <gazebo_msgs/ModelState.h>
 
 class TarsControlLib {
 
@@ -78,6 +80,25 @@ public:
 		}
 	}
 
+	static bool getModelState(gazebo_msgs::ModelState& modelstate){
+		TarsControlLib* inst = get();
+		gazebo_msgs::GetModelState srv;
+		srv.request.model_name = "tars";
+		if(inst->serviceTarsWorldPose.call(srv)){
+			ROS_INFO("C++ get model state good.");
+			std::cout << typeid(srv.response).name() << std::endl;
+			modelstate.model_name = "tars";
+			modelstate.pose = srv.response.pose;
+			modelstate.twist = srv.response.twist;
+			std::cout << srv.response << std::endl;
+			return true;
+		} else {
+			modelstate.model_name = "";
+			ROS_INFO("C++ get model state FAIL.");
+			return false;
+		}
+	}
+
 private:
 	TarsControlLib(ros::NodeHandlePtr nh){
 		ROS_INFO("Created TarControlLib Plugin.");
@@ -87,6 +108,8 @@ private:
 		pubJoint3 = nh_->advertise<std_msgs::Float64>("/tars/joint3_position_controller/command", 10);
 
 		subTarsJointState = nh->subscribe("/tars/joint_states", 10, TarsControlLib::jointStateCallback);
+
+		serviceTarsWorldPose = nh->serviceClient<gazebo_msgs::GetModelState>("/gazebo/get_model_state");
 	};
 
 	static TarsControlLib* _inst;
@@ -101,6 +124,8 @@ private:
 	ros::Publisher pubJoint3;
 
 	ros::Subscriber subTarsJointState;
+	
+	ros::ServiceClient serviceTarsWorldPose;
 
 	/* Model Parameters / State */
 
