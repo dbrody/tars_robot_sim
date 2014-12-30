@@ -57,7 +57,8 @@ Dependencies:
 + Check this directory out into your catkin workspace `src/` folder
 + Go back to your catkin workspace folder
 + Make your catkin workspace: `catkin_make; catkin_make install`
-+ Source the environment setup: `source devel/setup.sh` 
++ Source the environment setup: `source devel/setup.sh`
++ Install pygame for python graphics: `sudo apt-get install python-pygame`
 
 This project will compile packages as normal under ROS catkin make.
 
