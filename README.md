@@ -63,14 +63,13 @@ This project will compile packages as normal under ROS catkin make.
 
 ### To Run
 
-To open Gazebo and begin a simulation run:
+To open Gazebo to visualize the simulation run:
 
-	roslaunch tars_sample_controller tars_runner.launch
-
-You may also open Gazebo independently and then run the control script to repeatedly run trials. Run each of these in a separate terminal window:
-	
 	roslaunch tars_gazebo tars_world.launch
-	rosrun tars_sample_controller tars_sample_controller.py
+
+To start running simulations run:
+
+	rosrun tars_sim tars_sim
 
 
 ## Reference Material
