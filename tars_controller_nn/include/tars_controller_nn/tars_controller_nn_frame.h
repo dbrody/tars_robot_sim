@@ -7,6 +7,7 @@
 #include <QVector>
 
 #include <tars_control_lib/tars_control_lib.h>
+#include <gazebo_msgs/ModelState.h>
 
 
 #ifndef Q_MOC_RUN
@@ -42,7 +43,7 @@ private:
 	void updateNeurons();
 	void clear();
 
-
+	double start_time;
 
 	ros::NodeHandle nh_;
 	QTimer* update_timer_;

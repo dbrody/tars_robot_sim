@@ -29,10 +29,13 @@ public:
 	void paint(QPainter &painter);
 	void addInput(NeuronPtr& ptr);
 
+	QPointF getPos();
+
 private:
 	ros::NodeHandle nh_;
 
 	std::vector<NeuronPtr> inputs_;
+	std::vector<double> weights_;
 
 	QPointF pos_;
 
