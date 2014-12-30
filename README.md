@@ -53,21 +53,23 @@ Currently the project makes use of [ROS](http://www.ros.org/) and [Gazebo](http:
 Dependencies:
 + [Install ROS](http://wiki.ros.org/indigo/Installation/Ubuntu)
 + [Install ROS Controller](http://wiki.ros.org/ros_control) - See bottom of wiki page
++ [Make a ROS Workspace](http://wiki.ros.org/catkin/Tutorials/create_a_workspace)
 + Check this directory out into your catkin workspace `src/` folder
-+ Make your catkin workspace - `catkin_make; catkin_make install`
++ Go back to your catkin workspace folder
++ Make your catkin workspace: `catkin_make; catkin_make install`
++ Source the environment setup: `source devel/setup.sh` 
 
 This project will compile packages as normal under ROS catkin make.
 
 ### To Run
 
-To open Gazebo and begin a simulation run:
+To open Gazebo to visualize the simulation run:
 
-	roslaunch tars_sample_controller tars_runner.launch
-
-You may also open Gazebo independently and then run the control script to repeatedly run trials. Run each of these in a separate terminal window:
-	
 	roslaunch tars_gazebo tars_world.launch
-	rosrun tars_sample_controller tars_sample_controller.py
+
+To start running simulations run:
+
+	rosrun tars_sim tars_sim
 
 
 ## Reference Material
