@@ -3,20 +3,20 @@
 import math
 import rospy
 
-from tars_control_lib_py.control import tars_setup, get_model_position, setJoint1, setJoint2, setJoint3
-
-def tars_loop(t):
-	value = math.sin(t * 2) + t / 10
-	
-	model_position = get_model_position()
-	if model_position is not None:
-		log_str = "Sending Value: %.2f @ (%.2f, %.2f)" % (value, model_position.x, model_position.y)
-		rospy.loginfo(log_str)
-	
-	#setJoint1(value)
-	setJoint2(value)
-	#setJoint3(-value)
-
+from tars_control_lib_py.tars_control import TarsControl
 
 if __name__ == '__main__':
-	tars_setup('ExampleController', tars_loop)
+	tars = TarsControl('tars')
+
+	def tars_loop(t):
+		value = math.sin(t * 2) + t / 10
+		model_position = tars.get_model_position()
+		if model_position is not None:
+			log_str = "Sending Value: %.2f @ (%.2f, %.2f)" % (value, model_position.x, model_position.y)
+			rospy.loginfo(log_str)
+		
+		#tars.setJoint1(value)
+		tars.setJoint2(value)
+		#tars.setJoint3(-value)
+
+	tars.run(tars_loop)
