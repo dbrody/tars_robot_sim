@@ -53,6 +53,7 @@ Currently the project makes use of [ROS](http://www.ros.org/) and [Gazebo](http:
 Dependencies:
 + [Install ROS](http://wiki.ros.org/indigo/Installation/Ubuntu)
 + [Install ROS Controller](http://wiki.ros.org/ros_control) - See bottom of wiki page
++ [Make a ROS Workspace](http://wiki.ros.org/catkin/Tutorials/create_a_workspace)
 + Check this directory out into your catkin workspace `src/` folder
 + Make your catkin workspace - `catkin_make; catkin_make install`
 
