@@ -55,7 +55,9 @@ Dependencies:
 + [Install ROS Controller](http://wiki.ros.org/ros_control) - See bottom of wiki page
 + [Make a ROS Workspace](http://wiki.ros.org/catkin/Tutorials/create_a_workspace)
 + Check this directory out into your catkin workspace `src/` folder
-+ Make your catkin workspace - `catkin_make; catkin_make install`
++ Go back to your catkin workspace folder
++ Make your catkin workspace: `catkin_make; catkin_make install`
++ Source the environment setup: `source devel/setup.sh` 
 
 This project will compile packages as normal under ROS catkin make.
 
