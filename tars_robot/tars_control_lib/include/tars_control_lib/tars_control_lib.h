@@ -14,9 +14,9 @@ class TarsControlLib {
 
 public:
 
-	static void setup(ros::NodeHandlePtr nh){
+	static void setup(ros::NodeHandlePtr nh, std::string name){
 		if(_inst == NULL){
-			_inst = new TarsControlLib(nh);
+			_inst = new TarsControlLib(nh, name);
 		}
 	}
 
@@ -83,11 +83,11 @@ public:
 	static bool getModelState(gazebo_msgs::ModelState& modelstate){
 		TarsControlLib* inst = get();
 		gazebo_msgs::GetModelState srv;
-		srv.request.model_name = "tars";
+		srv.request.model_name = inst->getName();
 		if(inst->serviceTarsWorldPose.call(srv)){
 			ROS_INFO("C++ get model state good.");
 			std::cout << typeid(srv.response).name() << std::endl;
-			modelstate.model_name = "tars";
+			modelstate.model_name = inst->name_;
 			modelstate.pose = srv.response.pose;
 			modelstate.twist = srv.response.twist;
 			std::cout << srv.response << std::endl;
@@ -99,20 +99,26 @@ public:
 		}
 	}
 
-private:
-	TarsControlLib(ros::NodeHandlePtr nh){
-		ROS_INFO("Created TarControlLib Plugin.");
-		nh_ = nh;
-		pubJoint1 = nh_->advertise<std_msgs::Float64>("/tars/joint1_position_controller/command", 10);
-		pubJoint2 = nh_->advertise<std_msgs::Float64>("/tars/joint2_position_controller/command", 10);
-		pubJoint3 = nh_->advertise<std_msgs::Float64>("/tars/joint3_position_controller/command", 10);
+	std::string getName(){
+		return this->name_;
+	}
 
-		subTarsJointState = nh->subscribe("/tars/joint_states", 10, TarsControlLib::jointStateCallback);
+private:
+	TarsControlLib(ros::NodeHandlePtr nh, std::string name){
+		name_ = name;
+		ROS_INFO("Created TarControlLib Plugin for %s", name_.c_str());
+		nh_ = nh;
+		pubJoint1 = nh_->advertise<std_msgs::Float64>("/" + name_ + "/joint1_position_controller/command", 10);
+		pubJoint2 = nh_->advertise<std_msgs::Float64>("/" + name_ + "/joint2_position_controller/command", 10);
+		pubJoint3 = nh_->advertise<std_msgs::Float64>("/" + name_ + "/joint3_position_controller/command", 10);
+
+		subTarsJointState = nh->subscribe("/" + name_ + "/joint_states", 10, TarsControlLib::jointStateCallback);
 
 		serviceTarsWorldPose = nh->serviceClient<gazebo_msgs::GetModelState>("/gazebo/get_model_state");
 	};
 
 	static TarsControlLib* _inst;
+	std::string name_;
 	
 	ros::NodeHandlePtr nh_;
 

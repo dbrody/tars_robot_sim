@@ -19,7 +19,7 @@
   <!-- Import all Gazebo-customization elements, including Gazebo colors -->
   <gazebo>
     <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
-      <robotNamespace>/tars</robotNamespace>
+      <robotNamespace>/${name}</robotNamespace>
     </plugin>
   </gazebo>
   <gazebo reference="link1">

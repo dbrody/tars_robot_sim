@@ -132,7 +132,7 @@ void TarsControllerNNFrame::clear(){
 
 void TarsControllerNNFrame::onUpdate()
 {
-	ROS_INFO("Updating TarsControllerNN");
+	ROS_INFO("Updating.");
 
 	ros::spinOnce();
 

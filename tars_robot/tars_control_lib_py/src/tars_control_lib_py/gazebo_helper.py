@@ -1,4 +1,5 @@
 import rospy
+import time
 from ros_helper import setupService
 from gazebo_msgs.srv import GetWorldProperties, \
 	DeleteModel, DeleteModelRequest, \
@@ -10,6 +11,8 @@ from gazebo_msgs.msg import ModelState
 from controller_manager_msgs.srv import LoadController, SwitchController
 from geometry_msgs.msg import Pose, Twist
 from os import path
+
+from subprocess import Popen, PIPE
 
 # Delete all objects in gazebo except for ground_plane
 def gazebo_delete_all_objects():
@@ -45,22 +48,25 @@ def gazebo_delete_object(name):
 		return False
 	return True
 
-def gazebo_spawn_robot(robot_file, name, controllers):
+def gazebo_spawn_robot(xacro_file, name, controllers, x=0, y=0):
 	initial_pose = Pose()
-	initial_pose.position.x = 0
-	initial_pose.position.y = 0
+	initial_pose.position.x = x
+	initial_pose.position.y = y
 	initial_pose.position.z = 0
 
-	try:
-		print "Opening file: %s" % robot_file
-		model_urdf_f = open(robot_file, 'r')
-	except:
-		print "Unable to open file: %s" % robot_file
-		return		
-	model_urdf = model_urdf_f.read()
+	# Convert XACRO file to XML file with name parameter
+	xacro_path = path.dirname(xacro_file)
+	xml_path_out = path.join(xacro_path, 'tars.xml')
+	xacro_exec_path = Popen(['rospack', 'find', 'xacro'], stdout=PIPE).stdout.read().rstrip()
+	xacro_exec = xacro_exec_path + "/xacro.py"
+
+	print "Creating URDF XML:"
+	model_urdf = Popen([xacro_exec, xacro_file, 'name:='+name], stdout=PIPE).stdout.read().rstrip()
+
+	print "Setting robot_description rosparam..."
+	rospy.set_param("robot_description", model_urdf)
 
 	spawn_model = setupService('/gazebo/spawn_urdf_model', SpawnModel)
-
 	if spawn_model is None:
 		return False
 
@@ -72,13 +78,11 @@ def gazebo_spawn_robot(robot_file, name, controllers):
 		return False
 
 	print "Setting up controllers..."
-
 	load_controller = setupService('/'+name+'/controller_manager/load_controller', LoadController)
 	switch_controllers = setupService('/'+name+'/controller_manager/switch_controller', SwitchController)
-
 	if load_controller is None or switch_controllers is None:
+		print "   Unable to load controllers."
 		return False
-
 	try:
 		for controller in controllers:
 			result = load_controller(controller)

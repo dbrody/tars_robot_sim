@@ -12,15 +12,15 @@ pubs = dict()
 
 
 # Make an instance of the robot
-def spawn_tars():
+def spawn_tars(name, x=0, y=0):
 	try:
 		tars_root = Popen(['rospack', 'find', 'tars_description'], stdout=PIPE).stdout.read()
 		tars_root = tars_root.rstrip()
 	except Exception as er:
 		return
-	tars_file = tars_root+'/urdf/tars.xml'
+	tars_file = tars_root+'/urdf/tars.xacro'
 	controllers = ['joint1_position_controller', 'joint2_position_controller', 'joint3_position_controller']
-	return gazebo_spawn_robot(tars_file, 'tars', controllers)
+	return gazebo_spawn_robot(tars_file, name, controllers, x, y)
 
 
 # Spawn the rows of cones for the level

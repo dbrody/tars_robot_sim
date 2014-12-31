@@ -1,9 +1,16 @@
 #include <QApplication>
 
 #include <ros/ros.h>
+#include <string.h>
 #include <tars_control_lib/tars_control_lib.h>
-
+#include <signal.h>
+#include <stdlib.h>
+#include <time.h>
 #include "tars_controller_nn/tars_controller_nn_frame.h"
+
+void sigint_handler(int sig){
+	ros::shutdown();
+}
 
 class TarsControllerNNApp : public QApplication
 {
@@ -11,9 +18,17 @@ public:
 	ros::NodeHandlePtr nh_;
 
 	TarsControllerNNApp(int& argc, char** argv) : QApplication(argc, argv) {
-		ros::init(argc, argv, "TarsControllerNNApp", ros::init_options::NoSigintHandler);
+		char name[128] = "TarsControllerNNApp";
+		if(argc > 1){
+			strcpy(name, argv[1]);
+		}
+		ros::init(argc, argv, name);
+		
+		// Handle interrupts
+		signal(SIGINT, sigint_handler);
+
 		nh_.reset(new ros::NodeHandle);
-		TarsControlLib::setup(nh_);
+		TarsControlLib::setup(nh_, name);
 	}
 
 	int exec() {
@@ -24,6 +39,9 @@ public:
 };
 
 int main(int argc, char** argv){
+	timeval t1;
+	gettimeofday(&t1, NULL);
+	srand(t1.tv_usec * t1.tv_sec);
 	TarsControllerNNApp app(argc, argv);
 	return app.exec();
 }

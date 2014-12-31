@@ -6,11 +6,16 @@
 int main(int argc, char** argv){
 	ROS_INFO("Hello Test.");
 
+	if(argc < 2){
+		ROS_INFO("Required [name] arg.");
+		exit(1);
+	}
+
 	ros::init(argc, argv, "TarsControllerNNApp", ros::init_options::NoSigintHandler);
 
 	ros::NodeHandlePtr nh_;
 	nh_.reset(new ros::NodeHandle);
-	TarsControlLib::setup(nh_);
+	TarsControlLib::setup(nh_, "TarsControllerNNApp");
 
 	ros::Rate loop_rate(20);
 

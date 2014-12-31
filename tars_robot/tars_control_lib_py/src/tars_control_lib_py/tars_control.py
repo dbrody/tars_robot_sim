@@ -90,6 +90,6 @@ class TarsControl:
 	# Returns position of robot model
 	def get_model_pose(self):
 		model_state = gazebo_get_model_state(self.name)
-		if model_state == None:
+		if model_state is None or model_state is False:
 			return None
 		return model_state.pose
