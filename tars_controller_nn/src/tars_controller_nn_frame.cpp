@@ -155,12 +155,12 @@ void TarsControllerNNFrame::paintEvent(QPaintEvent* event){
 		return;
 	}
 
-	double j1 = TarsControlLib::joint1();
-	double j2 = TarsControlLib::joint2();
-	double j3 = TarsControlLib::joint3();
+	double j1 = TarsCore::joint1();
+	double j2 = TarsCore::joint2();
+	double j3 = TarsCore::joint3();
 
 	gazebo_msgs::ModelState modelstate;
-	TarsControlLib::getModelState(modelstate);
+	TarsCore::getModelState(modelstate);
 	double o1 = modelstate.pose.orientation.x;
 	double o2 = modelstate.pose.orientation.y;
 	double o3 = modelstate.pose.orientation.z;
@@ -208,9 +208,9 @@ void TarsControllerNNFrame::paintEvent(QPaintEvent* event){
 	for(; itIn != endIn; ++itIn) itIn->second->paint(painter);
 
 	// Send output values to joint commands
-	TarsControlLib::joint1(neurons_output_[0]->getValue());
-	TarsControlLib::joint2(neurons_output_[1]->getValue());
-	TarsControlLib::joint3(neurons_output_[2]->getValue());
+	TarsCore::joint1(neurons_output_[0]->getValue());
+	TarsCore::joint2(neurons_output_[1]->getValue());
+	TarsCore::joint3(neurons_output_[2]->getValue());
 }
 
 void TarsControllerNNFrame::updateNeurons(){

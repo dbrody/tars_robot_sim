@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="Construction Cone">
+    <link name="link">
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <scale>10 10 10</scale>
+            <uri>model://construction_cone/meshes/construction_cone.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <scale>10 10 10</scale>
+            <uri>model://construction_cone/meshes/construction_cone.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <inertial>
+        <pose>0 0 0.2 0 0 0</pose>
+        <mass>10.0</mass>
+        <inertia>
+          <ixx>0.01</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.01</iyy>
+          <iyz>0</iyz>
+          <izz>0.01</izz>
+        </inertia>
+      </visual>
+    </link>
+  </model>
+</sdf>

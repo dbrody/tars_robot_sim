@@ -1,0 +1,16 @@
+<package>
+	<name>tars_corepy</name>
+	<maintainer email="dbrody@gmail.com">David Brody</maintainer>
+	<description>
+		A ROS library for the core of the TARS robot sim. Controls, etc.
+	</description>
+	<version>0.0.0</version>
+	<license>BSD</license>
+
+	<!-- Required by Catkin -->
+	<buildtool_depend>catkin</buildtool_depend>
+
+	<build_depend>rospy</build_depend>
+	<run_depend>rospy</run_depend>
+
+</package>

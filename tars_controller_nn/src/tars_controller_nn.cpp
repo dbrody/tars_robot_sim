@@ -2,7 +2,7 @@
 
 #include <ros/ros.h>
 #include <string.h>
-#include <tars_control_lib/tars_control_lib.h>
+#include <tars_corecpp/tars_corecpp.h>
 #include <signal.h>
 #include <stdlib.h>
 #include <time.h>
@@ -28,7 +28,7 @@ public:
 		signal(SIGINT, sigint_handler);
 
 		nh_.reset(new ros::NodeHandle);
-		TarsControlLib::setup(nh_, name);
+		TarsCore::setup(nh_, name);
 	}
 
 	int exec() {

@@ -2,7 +2,7 @@ import rospy
 import roslaunch
 import time
 
-from tars_control_lib_py.level_helper import spawn_tars, spawn_cones
+from tars_corepy.level_helper import spawn_tars, spawn_cones
 
 from TarsSimRobot import TarsSimRobot
 from TarsSimGui import TarsSimGui

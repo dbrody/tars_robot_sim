@@ -25,13 +25,11 @@ The TARS robot is currently very simplified. It has 3 joints and 4 legs all acua
 Currently the project makes use of [ROS](http://www.ros.org/) and [Gazebo](http://gazebosim.org/) for controlling and simulating the robot respectively.
 
 ### Components
-+ **tars_robot** - Packages used for robot description and simulation
-	+ [**tars_control_lib**](tars_robot/tars_control_lib/README.md) - C++ shared library that abstracts control of the TARS simulated robot 
-	+ [**tars_control_lib_py**](tars_robot/tars_control_lib_py/README.md) - Python package that abstracts control of the TARS simulated robot 
-	+ **tars_control** - Package used to set up robot controller topics for joints
-	+ **tars_description** - Package used for describing TARS robot model
-	+ **tars_gazebo** - Package used for setting up gazebo simulation environment with TARS robot
-+ **tars_controller_samples** - Example TARS controllers
++ **tars_core** - Core packages used for robot description and client interfaces for the simulator.
+	+ [**tars_corecpp**](tars_core/tars_corecpp/README.md) - C++ shared library that abstracts control of the TARS simulated robot. 
+	+ [**tars_corepy**](tars_core/tars_corepy/README.md) - Python package that abstracts control of the TARS simulated robot 
+	+ **tars_world** - Describes the TARS robot model and world, simulation settings and launching simulation world.
++ **tars_controller_samples**
 	+ [**tars_sample_controller_cpp**](tars_controller_samples/tars_sample_controller_cpp/README.md) - C++ shared library that abstracts control of the TARS simulated robot 
 	+ [**tars_sample_controller_py**](tars_controller_samples/tars_sample_controller_py/README.md) - Python shared package that abstracts control of the TARS simulated robot 
 + **tars_sim** - Example simulation runner. Runs TARS robots for period and restarts periodically.
@@ -67,7 +65,7 @@ This project will compile packages as normal under ROS catkin make.
 
 To open Gazebo to visualize the simulation run:
 
-	roslaunch tars_gazebo tars_world.launch
+	roslaunch tars_world tars_world.launch
 
 To start running simulations run:
 

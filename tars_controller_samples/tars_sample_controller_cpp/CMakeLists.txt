@@ -6,7 +6,7 @@ find_package(catkin REQUIRED COMPONENTS
   roslib
   rostime
   std_msgs
-  tars_control_lib
+  tars_corecpp
 )
 
 include_directories(include ${catkin_INCLUDE_DIRS})

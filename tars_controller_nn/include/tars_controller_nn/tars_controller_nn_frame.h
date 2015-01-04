@@ -6,7 +6,7 @@
 #include <QTimer>
 #include <QVector>
 
-#include <tars_control_lib/tars_control_lib.h>
+#include <tars_corecpp/tars_corecpp.h>
 #include <gazebo_msgs/ModelState.h>
 
 

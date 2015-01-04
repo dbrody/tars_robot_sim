@@ -2,12 +2,12 @@
 import time
 import roslaunch
 from subprocess import Popen, PIPE
-from tars_control_lib_py.tars_control import TarsControl
+from tars_corepy.tars_control import TarsControl
 from TarsHeuristicCalculator import TarsHeuristicCalculator
 
 
-from tars_control_lib_py.level_helper import spawn_tars
-from tars_control_lib_py.gazebo_helper import gazebo_delete_object
+from tars_corepy.level_helper import spawn_tars
+from tars_corepy.gazebo_helper import gazebo_delete_object
 
 class TarsSimRobot:
 
@@ -24,7 +24,7 @@ class TarsSimRobot:
 
 
 	def spawn(self):
-		tars_control_loc = Popen(['rospack', 'find', 'tars_control'], stdout=PIPE).stdout.read().rstrip()
+		tars_control_loc = Popen(['rospack', 'find', 'tars_world'], stdout=PIPE).stdout.read().rstrip()
 		tars_control_yaml = tars_control_loc + "/config/tars_control.yaml"
 		Popen(['rosparam', 'load', tars_control_yaml, self.name])
 

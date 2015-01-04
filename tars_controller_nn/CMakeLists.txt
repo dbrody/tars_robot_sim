@@ -13,7 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
   roslib
   rostime
   std_msgs
-  tars_control_lib
+  tars_corecpp
 )
 
 find_package(Qt4 4.6 REQUIRED COMPONENTS QtCore QtGui)
