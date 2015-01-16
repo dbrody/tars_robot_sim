@@ -1,5 +1,56 @@
 #! /usr/bin/env python
-from tars_sim.TarsSimRunner import TarsSimRunner
+
+
+from tars_corepy.runner import TarsRunner, TarsRunnerHeuristic
+import math
+
+
+
+
+
+
+def defaultHeuristicCalc(self):
+	target_vel = [1, 0, 0]
+	# Error for velocity
+	self.heur_step += 10 * abs(target_vel[0] - self.vel[0])
+	self.heur_step += 10 * abs(target_vel[1] - self.vel[1])
+	self.heur_step += 20 * abs(target_vel[2] - self.vel[2])
+
+	# Error for not staying upright
+	self.heur_step += 30 * abs(1.25 - self.pose.position.z)
+
+	# Error for sending commands that cant be achieved
+	joint_positions = [self.joint_state.position[0], self.joint_state.position[1], self.joint_state.position[2]]
+	joint_positions[0] = joint_positions[0] % (math.pi * 2)
+	joint_positions[1] = joint_positions[1] % (math.pi * 2)
+	joint_positions[2] = joint_positions[2] % (math.pi * 2)
+	if 	joint_positions[0] < 0:
+		joint_positions[0] += (math.pi * 2)
+	if 	joint_positions[1] < 0:
+		joint_positions[1] += (math.pi * 2)
+	if 	joint_positions[2] < 0:
+		joint_positions[2] += (math.pi * 2)
+
+	self.joint_commands[0] = self.joint_commands[0] % (math.pi * 2)
+	self.joint_commands[1] = self.joint_commands[1] % (math.pi * 2)
+	self.joint_commands[2] = self.joint_commands[2] % (math.pi * 2)
+	if self.joint_commands[0] < 0:
+		self.joint_commands[0] += math.pi * 2
+	if self.joint_commands[1] < 0:
+		self.joint_commands[1] += math.pi * 2
+	if self.joint_commands[2] < 0:
+		self.joint_commands[2] += math.pi * 2
+
+
+	self.heur_step += abs(self.joint_commands[0] - joint_positions[0])
+	self.heur_step += abs(self.joint_commands[1] - joint_positions[1])
+	self.heur_step += abs(self.joint_commands[2] - joint_positions[2])
+
+	self.heur_step += abs(self.joint_state.effort[0]) / 1000
+	self.heur_step += abs(self.joint_state.effort[1]) / 1000
+	self.heur_step += abs(self.joint_state.effort[2]) / 1000
+
 
 if __name__ == '__main__':
-	sim_runner = TarsSimRunner()
+	print TarsRunner
+	sim_runner = TarsRunner(func=defaultHeuristicCalc)

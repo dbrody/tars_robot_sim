@@ -9,8 +9,3 @@ catkin_python_setup()
 
 catkin_install_python(PROGRAMS scripts/tars_sim
 	DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
-
-install(DIRECTORY src
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
-
-

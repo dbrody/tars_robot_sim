@@ -2,6 +2,7 @@
 import roslib; roslib.load_manifest('tars_corepy')
 
 import rospy
+import math
 
 from std_msgs.msg import Float64
 from sensor_msgs.msg import JointState
@@ -9,10 +10,20 @@ from control_msgs.msg import JointControllerState
 
 from gazebo_helper import gazebo_get_model_state
 
-class TarsControl:
+class TarsControl(object):
+
+	_insts = {}
+
+
+	def __new__(cls, *args, **kwargs):
+		name = args[0]
+		if name not in cls._insts:
+			cls._insts[name] = super(TarsControl, cls).__new__(cls, *args, **kwargs)
+		return cls._insts[name]
 
 	def __init__(self, name, init_node=True, listen_only=False):
-
+		if name in TarsControl._insts and hasattr(TarsControl._insts[name], 'init'):
+			return
 		self.name = name
 
 		self.pubs = dict()
@@ -23,7 +34,7 @@ class TarsControl:
 		if init_node:
 			rospy.init_node(name+"_node", anonymous=True)
 
-		if listen_only:
+		if not listen_only:
 			self.pubs['joint1'] = rospy.Publisher('/'+self.name+'/joint1_position_controller/command', Float64, queue_size=10)
 			self.pubs['joint2'] = rospy.Publisher('/'+self.name+'/joint2_position_controller/command', Float64, queue_size=10)
 			self.pubs['joint3'] = rospy.Publisher('/'+self.name+'/joint3_position_controller/command', Float64, queue_size=10)
@@ -32,7 +43,7 @@ class TarsControl:
 		self.subs['joint1'] = rospy.Subscriber( '/'+self.name+'/joint1_position_controller/command', Float64, self.joint1_state_callback)
 		self.subs['joint2'] = rospy.Subscriber( '/'+self.name+'/joint2_position_controller/command', Float64, self.joint2_state_callback)
 		self.subs['joint3'] = rospy.Subscriber( '/'+self.name+'/joint3_position_controller/command', Float64, self.joint3_state_callback)
-
+		self.init = True
 
 	def run(self, loop_func):
 		try:	
@@ -53,13 +64,13 @@ class TarsControl:
 		self.model_joint_state = data
 	
 	def joint1_state_callback(self, data):
-		self.joint_commands[0] = data.data
+		self.joint_commands[0] = data.data % (2 * math.pi)
 
 	def joint2_state_callback(self, data):
-		self.joint_commands[1] = data.data
+		self.joint_commands[1] = data.data % (2 * math.pi)
 
 	def joint3_state_callback(self, data):
-		self.joint_commands[2] = data.data
+		self.joint_commands[2] = data.data % (2 * math.pi)
 
 	# Functions to publish to robot joint positions
 	def setJoint1(self, value):

@@ -57,11 +57,11 @@ def gazebo_spawn_robot(xacro_file, name, controllers, x=0, y=0):
 	# Convert XACRO file to XML file with name parameter
 	xacro_path = path.dirname(xacro_file)
 	xml_path_out = path.join(xacro_path, 'tars.xml')
-	xacro_exec_path = Popen(['rospack', 'find', 'xacro'], stdout=PIPE).stdout.read().rstrip()
+	xacro_exec_path = Popen(['rospack', 'find', 'xacro'], stdout=PIPE, close_fds=True).communicate()[0].rstrip()
 	xacro_exec = xacro_exec_path + "/xacro.py"
 
 	print "Creating URDF XML:"
-	model_urdf = Popen([xacro_exec, xacro_file, 'name:='+name], stdout=PIPE).stdout.read().rstrip()
+	model_urdf = Popen([xacro_exec, xacro_file, 'name:='+name], stdout=PIPE, close_fds=True).communicate()[0]
 
 	print "Setting robot_description rosparam..."
 	rospy.set_param("robot_description", model_urdf)
@@ -109,6 +109,7 @@ def gazebo_spawn_object(name, sdf_file, x=0, y=0, z=0):
 
 	model_sdf_f = open(sdf_file, 'r')
 	model_sdf = model_sdf_f.read()
+	model_sdf_f.close()
 
 	print "Adding %s @ (%.2f, %.2f, %.2f)" % (name, x, y, z),
 	spawn_sdf_model = setupService('/gazebo/spawn_sdf_model', SpawnModel)

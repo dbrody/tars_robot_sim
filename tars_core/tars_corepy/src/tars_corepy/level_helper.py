@@ -14,8 +14,7 @@ pubs = dict()
 # Make an instance of the robot
 def spawn_tars(name, x=0, y=0):
 	try:
-		tars_root = Popen(['rospack', 'find', 'tars_world'], stdout=PIPE).stdout.read()
-		tars_root = tars_root.rstrip()
+		tars_root = Popen(['rospack', 'find', 'tars_world'], stdout=PIPE, close_fds=True).communicate()[0].rstrip()
 	except Exception as er:
 		return
 	tars_file = tars_root+'/urdf/tars.xacro'
@@ -43,8 +42,8 @@ def set_cone(name, x, y):
 	if not cone:
 		# Get path to cone model
 		try:
-			cone_file = Popen(['rospack', 'find', 'tars_world'], stdout=PIPE).stdout.read()
-			cone_file = cone_file.rstrip() + "/models/construction_cone/model.sdf"
+			cone_file = Popen(['rospack', 'find', 'tars_world'], stdout=PIPE, close_fds=True).communicate()[0].rstrip()
+			cone_file = cone_file + "/models/construction_cone/model.sdf"
 		except Exception as err:
 			print "Unable to add cone. Err: %s" % err
 			return
